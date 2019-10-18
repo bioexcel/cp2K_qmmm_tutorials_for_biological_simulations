@@ -1,0 +1,7 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+NMA = loadpdb NMA.pdb
+solvatebox NMA TIP3PBOX 15
+savepdb NMA NMA.pdb
+saveamberparm NMA NMA.prmtop NMA.inpcrd
+quit

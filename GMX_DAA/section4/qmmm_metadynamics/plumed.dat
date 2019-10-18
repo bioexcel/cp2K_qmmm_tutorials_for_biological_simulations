@@ -1,0 +1,16 @@
+COM ATOMS=6640,6643 LABEL=com1
+COM ATOMS=6641,6642 LABEL=com2
+
+DISTANCE ATOMS=com1,com2 LABEL=d1
+UPPER_WALLS ARG=d1 AT=6.0 KAPPA=150.0 EXP=2 EPS=1 OFFSET=0 LABEL=uwall
+
+#
+# Activate metadynamics in d1
+# depositing a Gaussian every 500 time steps,
+# with height equal to 1.2 kJ/mol,
+# and width 0.35 rad for both CVs.
+#
+METAD ARG=d1 PACE=500 HEIGHT=1.2 SIGMA=0.35,0.35 FILE=HILLS LABEL=metad
+
+# monitor the d1 distance, the upper wall and the metadynamics bias potential
+PRINT STRIDE=10 ARG=d1,uwall,metad.bias FILE=COLVAR

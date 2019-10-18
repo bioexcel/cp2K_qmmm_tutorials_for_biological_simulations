@@ -1,0 +1,71 @@
+&GLOBAL
+  PROJECT EM
+  PRINT_LEVEL LOW
+  RUN_TYPE GEO_OPT
+&END GLOBAL
+
+&FORCE_EVAL
+  METHOD FIST
+  &MM
+    &FORCEFIELD
+      PARMTYPE AMBER
+      PARM_FILE_NAME NMA.prmtop
+      &SPLINE
+        EMAX_SPLINE 1.0E8
+        RCUT_NB [angstrom] 10
+      &END SPLINE
+    &END FORCEFIELD
+    &POISSON
+      &EWALD
+        EWALD_TYPE SPME
+        ALPHA .40
+        GMAX 80
+      &END EWALD
+    &END POISSON
+  &END MM
+  &SUBSYS
+    &CELL
+    !Set box dimensions here
+      ABC [angstrom] 40.1760410  39.3025410  39.5609130 
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &TOPOLOGY
+      CONN_FILE_FORMAT AMBER
+      CONN_FILE_NAME NMA.prmtop
+      COORD_FILE_FORMAT CRD
+      COORD_FILE_NAME NMA.inpcrd
+    &END TOPOLOGY
+
+  &END SUBSYS
+&END FORCE_EVAL
+
+
+&MOTION
+  &GEO_OPT
+    OPTIMIZER LBFGS
+    MAX_ITER 1000
+    MAX_DR    1.0E-02 !Convergence criterion for the maximum geometry change between the current and the last optimizer iteration
+    RMS_DR    5.0E-03 !Convergence criterion for the root mean square (RMS) geometry change between the current and the last optimizer iteration
+    MAX_FORCE 1.0E-02 !Convergence criterion for the maximum force component of the current configuration
+    RMS_FORCE 5.0E-03 !Convergence criterion for the root mean square (RMS) force of the current configuration
+
+  &END
+  &PRINT
+    &TRAJECTORY                                 ! Controls the output of the trajectory
+      FORMAT XYZ                                ! Format of the output trajectory is XYZ
+      &EACH                                     ! New trajectory frame will be printed each 100 md steps
+	      GEO_OPT 500
+      &END EACH
+    &END TRAJECTORY
+    &RESTART                                    ! This section controls the printing of restart files
+      &EACH                                     ! A restart file will be printed every 10000 md steps
+        GEO_OPT 500
+      &END EACH
+    &END RESTART
+    &RESTART_HISTORY                            ! This section controls dumping of unique restart files during the run keeping all of them.Most useful if recovery is needed at a later point.
+      &EACH                                     ! A new restart file will be printed every 10000 md steps
+        GEO_OPT 500
+      &END EACH
+    &END RESTART_HISTORY
+  &END PRINT
+&END MOTION

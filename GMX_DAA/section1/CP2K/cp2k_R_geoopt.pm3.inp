@@ -1,0 +1,120 @@
+&GLOBAL
+  PROJECT DA.P
+  RUN_TYPE GEO_OPT
+  PRINT_LEVEL LOW
+&END GLOBAL
+
+&FORCE_EVAL
+  METHOD QS
+  
+  &SUBSYS
+    &CELL
+      ABC 12.4138 12.4138 12.4138
+    &END CELL
+    &COORD
+O                -1.269309    0.636894   -0.008112
+O                -3.694463    1.036724    0.307966
+S                -2.560690    0.156312    0.434734
+H                 1.328169    1.989177    0.485902
+H                 0.776598    1.064485   -1.958923
+H                 6.140201    1.952038   -1.067501
+H                 5.772058    1.334502   -2.702358
+H                 5.417335    3.033566   -2.288758
+Cl               -3.224721   -4.041655    0.499482
+Cl               -2.663070   -2.896957    3.390414
+Cl               -2.141535    0.266918    3.472425
+Cl               -3.174675   -1.829201   -1.822396
+C                -2.937443   -2.438652    0.732813
+C                -2.675493   -1.906509    2.076843
+C                -2.457989   -0.569654    2.091469
+C                 2.028817    1.811260   -0.331381
+C                 1.752024    1.347133   -1.559232
+C                -2.912049   -1.490275   -0.233996
+N                 4.109308    1.567602   -1.440487
+C                 3.020517    1.244206   -2.354520
+O                 3.186864    0.934570   -3.513133
+C                 3.504006    2.055564   -0.207309
+O                 4.137272    2.529733    0.709300
+C                 5.431060    2.004561   -1.903164
+    &END COORD
+#    &KIND H
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q1
+#    &END KIND
+#    &KIND C
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q4
+#    &END KIND
+#    &KIND N
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q5
+#    &END KIND
+#    &KIND O
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q6
+#    &END KIND
+#    &KIND CL
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q7
+#    &END KIND
+#    &KIND S
+#      BASIS_SET DZVP-GTH-PADE
+#      POTENTIAL GTH-PADE-q6
+#    &END KIND
+  &END SUBSYS
+
+  &DFT
+    CHARGE 0
+
+    &QS
+      METHOD PM3
+      &SE
+         &COULOMB
+           CUTOFF [angstrom] 10.0
+         &END
+         &EXCHANGE
+           CUTOFF [angstrom] 10.0
+         &END
+      &END
+    &END QS
+
+    &MGRID
+      CUTOFF 200
+      NGRIDS 4
+      REL_CUTOFF 30
+    &END MGRID
+
+    &SCF
+      SCF_GUESS ATOMIC
+      EPS_SCF 1.0E-05
+      MAX_SCF 200
+
+      &OT
+        MINIMIZER DIIS
+        PRECONDITIONER FULL_SINGLE_INVERSE
+      &END
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 10
+      &END
+
+      &PRINT
+        &RESTART OFF
+        &END RESTART
+      &END PRINT
+    &END SCF
+
+  &END DFT
+&END FORCE_EVAL
+
+&MOTION
+  &GEO_OPT
+    TYPE MINIMIZATION
+	    MAX_ITER 4000
+    OPTIMIZER CG
+    &CG
+      MAX_STEEP_STEPS  0
+      RESTART_LIMIT 9.0E-01
+    &END CG
+  &END GEO_OPT
+&END MOTION  

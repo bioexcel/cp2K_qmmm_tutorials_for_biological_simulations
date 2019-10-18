@@ -1,0 +1,161 @@
+; NMA_GMX.top created by acpype (v: 2019-07-10T18:04:00UTC) on Thu Sep 26 10:34:08 2019
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333
+
+[ atomtypes ]
+;name   bond_type     mass     charge   ptype   sigma         epsilon       Amb
+ HC       HC          0.00000  0.00000   A     2.64953e-01   6.56888e-02 ; 1.49  0.0157
+ CT       CT          0.00000  0.00000   A     3.39967e-01   4.57730e-01 ; 1.91  0.1094
+ C        C           0.00000  0.00000   A     3.39967e-01   3.59824e-01 ; 1.91  0.0860
+ O        O           0.00000  0.00000   A     2.95992e-01   8.78640e-01 ; 1.66  0.2100
+ N        N           0.00000  0.00000   A     3.25000e-01   7.11280e-01 ; 1.82  0.1700
+ H        H           0.00000  0.00000   A     1.06908e-01   6.56888e-02 ; 0.60  0.0157
+ H1       H1          0.00000  0.00000   A     2.47135e-01   6.56888e-02 ; 1.39  0.0157
+ OW       OW          0.00000  0.00000   A     3.15075e-01   6.35968e-01 ; 1.77  0.1520
+ HW       HW          0.00000  0.00000   A     0.00000e+00   0.00000e+00 ; 0.00  0.0000
+
+[ moleculetype ]
+;name            nrexcl
+ NMA              3
+
+[ atoms ]
+;   nr  type  resi  res  atom  cgnr     charge      mass       ; qtot   bond_type
+     1   HC     1   ACE    H1    1     0.112300      1.00800 ; qtot 0.112
+     2   CT     1   ACE   CH3    2    -0.366200     12.01000 ; qtot -0.254
+     3   HC     1   ACE    H2    3     0.112300      1.00800 ; qtot -0.142
+     4   HC     1   ACE    H3    4     0.112300      1.00800 ; qtot -0.029
+     5    C     1   ACE     C    5     0.597201     12.01000 ; qtot 0.568
+     6    O     1   ACE     O    6    -0.567901     16.00000 ; qtot 0.000
+     7    N     2   NME     N    7    -0.415700     14.01000 ; qtot -0.416
+     8    H     2   NME     H    8     0.271900      1.00800 ; qtot -0.144
+     9   CT     2   NME   CH3    9    -0.149000     12.01000 ; qtot -0.293
+    10   H1     2   NME  HH31   10     0.097600      1.00800 ; qtot -0.195
+    11   H1     2   NME  HH32   11     0.097600      1.00800 ; qtot -0.098
+    12   H1     2   NME  HH33   12     0.097600      1.00800 ; qtot 0.000
+
+[ bonds ]
+;   ai     aj funct   r             k
+     1      2   1    1.0900e-01    2.8451e+05 ;     H1 - CH3   
+     2      3   1    1.0900e-01    2.8451e+05 ;    CH3 - H2    
+     2      4   1    1.0900e-01    2.8451e+05 ;    CH3 - H3    
+     2      5   1    1.5220e-01    2.6527e+05 ;    CH3 - C     
+     5      6   1    1.2290e-01    4.7698e+05 ;      C - O     
+     5      7   1    1.3350e-01    4.1003e+05 ;      C - N     
+     7      8   1    1.0100e-01    3.6317e+05 ;      N - H     
+     7      9   1    1.4490e-01    2.8200e+05 ;      N - CH3   
+     9     10   1    1.0900e-01    2.8451e+05 ;    CH3 - HH31  
+     9     11   1    1.0900e-01    2.8451e+05 ;    CH3 - HH32  
+     9     12   1    1.0900e-01    2.8451e+05 ;    CH3 - HH33  
+
+[ pairs ]
+;   ai     aj    funct
+     1      6      1 ;     H1 - O     
+     1      7      1 ;     H1 - N     
+     2      8      1 ;    CH3 - H     
+     2      9      1 ;    CH3 - CH3   
+     3      6      1 ;     H2 - O     
+     3      7      1 ;     H2 - N     
+     4      6      1 ;     H3 - O     
+     4      7      1 ;     H3 - N     
+     5     10      1 ;      C - HH31  
+     5     11      1 ;      C - HH32  
+     5     12      1 ;      C - HH33  
+     6      8      1 ;      O - H     
+     6      9      1 ;      O - CH3   
+     8     10      1 ;      H - HH31  
+     8     11      1 ;      H - HH32  
+     8     12      1 ;      H - HH33  
+
+[ angles ]
+;   ai     aj     ak    funct   theta         cth
+     1      2      3      1    1.0950e+02    2.9288e+02 ;     H1 - CH3    - H2    
+     1      2      4      1    1.0950e+02    2.9288e+02 ;     H1 - CH3    - H3    
+     1      2      5      1    1.0950e+02    4.1840e+02 ;     H1 - CH3    - C     
+     2      5      6      1    1.2040e+02    6.6944e+02 ;    CH3 - C      - O     
+     2      5      7      1    1.1660e+02    5.8576e+02 ;    CH3 - C      - N     
+     3      2      4      1    1.0950e+02    2.9288e+02 ;     H2 - CH3    - H3    
+     3      2      5      1    1.0950e+02    4.1840e+02 ;     H2 - CH3    - C     
+     4      2      5      1    1.0950e+02    4.1840e+02 ;     H3 - CH3    - C     
+     5      7      8      1    1.2000e+02    4.1840e+02 ;      C - N      - H     
+     5      7      9      1    1.2190e+02    4.1840e+02 ;      C - N      - CH3   
+     6      5      7      1    1.2290e+02    6.6944e+02 ;      O - C      - N     
+     7      9     10      1    1.0950e+02    4.1840e+02 ;      N - CH3    - HH31  
+     7      9     11      1    1.0950e+02    4.1840e+02 ;      N - CH3    - HH32  
+     7      9     12      1    1.0950e+02    4.1840e+02 ;      N - CH3    - HH33  
+     8      7      9      1    1.1804e+02    4.1840e+02 ;      H - N      - CH3   
+    10      9     11      1    1.0950e+02    2.9288e+02 ;   HH31 - CH3    - HH32  
+    10      9     12      1    1.0950e+02    2.9288e+02 ;   HH31 - CH3    - HH33  
+    11      9     12      1    1.0950e+02    2.9288e+02 ;   HH32 - CH3    - HH33  
+
+[ dihedrals ] ; propers
+; for gromacs 4.5 or higher, using funct 9
+;    i      j      k      l   func   phase     kd      pn
+     1      2      5      6      9     0.00   0.00000   0 ;     H1-   CH3-     C-     O
+     1      2      5      6      9     0.00   3.34720   1 ;     H1-   CH3-     C-     O
+     1      2      5      6      9   180.00   0.33472   3 ;     H1-   CH3-     C-     O
+     1      2      5      7      9     0.00   0.00000   0 ;     H1-   CH3-     C-     N
+     2      5      7      8      9   180.00  10.46000   2 ;    CH3-     C-     N-     H
+     2      5      7      9      9   180.00  10.46000   2 ;    CH3-     C-     N-   CH3
+     3      2      5      6      9     0.00   0.00000   0 ;     H2-   CH3-     C-     O
+     3      2      5      6      9     0.00   3.34720   1 ;     H2-   CH3-     C-     O
+     3      2      5      6      9   180.00   0.33472   3 ;     H2-   CH3-     C-     O
+     3      2      5      7      9     0.00   0.00000   0 ;     H2-   CH3-     C-     N
+     4      2      5      6      9     0.00   0.00000   0 ;     H3-   CH3-     C-     O
+     4      2      5      6      9     0.00   3.34720   1 ;     H3-   CH3-     C-     O
+     4      2      5      6      9   180.00   0.33472   3 ;     H3-   CH3-     C-     O
+     4      2      5      7      9     0.00   0.00000   0 ;     H3-   CH3-     C-     N
+     5      7      9     10      9     0.00   0.00000   0 ;      C-     N-   CH3-  HH31
+     5      7      9     11      9     0.00   0.00000   0 ;      C-     N-   CH3-  HH32
+     5      7      9     12      9     0.00   0.00000   0 ;      C-     N-   CH3-  HH33
+     6      5      7      8      9     0.00   8.36800   1 ;      O-     C-     N-     H
+     6      5      7      8      9   180.00  10.46000   2 ;      O-     C-     N-     H
+     6      5      7      9      9   180.00  10.46000   2 ;      O-     C-     N-   CH3
+     8      7      9     10      9     0.00   0.00000   0 ;      H-     N-   CH3-  HH31
+     8      7      9     11      9     0.00   0.00000   0 ;      H-     N-   CH3-  HH32
+     8      7      9     12      9     0.00   0.00000   0 ;      H-     N-   CH3-  HH33
+
+[ dihedrals ] ; impropers
+; treated as propers in GROMACS to use correct AMBER analytical function
+;    i      j      k      l   func   phase     kd      pn
+     2      7      5      6      4   180.00  43.93200   2 ;    CH3-     N-     C-     O
+     5      9      7      8      4   180.00   4.60240   2 ;      C-   CH3-     N-     H
+
+[ moleculetype ]
+; molname       nrexcl ; TIP3P model
+  WAT             2
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+     1     OW      1     WAT     O      1     -0.834   16.00000
+     2     HW      1     WAT    H1      1      0.417    1.00800
+     3     HW      1     WAT    H2      1      0.417    1.00800
+
+#ifdef FLEXIBLE
+[ bonds ]
+; i j   funct   length  force.c.
+1   2   1   0.09572   462750.4 0.09572   462750.4
+1   3   1   0.09572   462750.4 0.09572   462750.4
+
+[ angles ]
+; i j   k   funct   angle   force.c.
+2   1   3   1   104.520    836.800  104.520    836.800
+#else
+[ settles ]
+; i j   funct   length
+1   1   0.09572 0.15139
+
+[ exclusions ]
+1   2   3
+2   1   3
+3   1   2
+#endif
+
+[ system ]
+ NMA
+
+[ molecules ]
+; Compound        nmols
+ NMA              1     
+ WAT              1456  

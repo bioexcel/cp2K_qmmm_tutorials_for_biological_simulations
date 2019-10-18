@@ -1,0 +1,77 @@
+HETATM    1  O   DAA     1      24.841 -18.142  53.391  0.00  0.00           O  
+HETATM    2  O   DAA     2      23.128 -19.015  54.965  0.00  0.00           O  
+HETATM    3  C   DAA     3      22.283 -17.943  52.854  0.00  0.00           C  
+HETATM    4  C   DAA     4      23.472 -18.365  53.738  0.00  0.00           C  
+HETATM    5  C   DAA     5      20.572 -16.521  51.177  0.00  0.00           C  
+HETATM    6  C   DAA     6      21.560 -17.483  50.491  0.00  0.00           C  
+HETATM    7  C   DAA     7      22.772 -17.714  51.412  0.00  0.00           C  
+HETATM    8  H   DAA     8      19.610 -17.018  51.306  0.00  0.00           H  
+HETATM    9  H   DAA     9      20.965 -16.232  52.151  0.00  0.00           H  
+HETATM   10  H   DAA    10      21.897 -17.049  49.550  0.00  0.00           H  
+HETATM   11  H   DAA    11      21.065 -18.434  50.295  0.00  0.00           H  
+HETATM   12  H   DAA    12      23.423 -16.840  51.384  0.00  0.00           H  
+HETATM   13  H   DAA    13      23.324 -18.591  51.073  0.00  0.00           H  
+HETATM   14  H   DAA    14      21.851 -17.021  53.243  0.00  0.00           H  
+HETATM   15  H   DAA    15      21.528 -18.730  52.862  0.00  0.00           H  
+HETATM   16  O   DAA    16      14.091 -13.050  50.733  0.00  0.00           O1-
+HETATM   17  O   DAA    17      13.478 -15.268  51.776  0.00  0.00           O1-
+HETATM   18  S   DAA    18      14.478 -14.385  51.193  0.00  0.00           S  
+HETATM   19  H   DAA    19      16.966 -12.664  51.270  0.00  0.00           H  
+HETATM   20  H   DAA    20      16.472 -13.580  49.081  0.00  0.00           H  
+HETATM   21  H   DAA    21      20.593 -15.493  49.248  0.00  0.00           H  
+HETATM   22  H   DAA    22      21.104 -14.494  50.637  0.00  0.00           H  
+HETATM   23 Cl   DAA    23      16.231 -18.053  50.504  0.00  0.00          Cl  
+HETATM   24 Cl   DAA    24      16.860 -16.797  53.522  0.00  0.00          Cl  
+HETATM   25 Cl   DAA    25      16.026 -13.696  53.772  0.00  0.00          Cl  
+HETATM   26 Cl   DAA    26      14.916 -15.888  48.515  0.00  0.00          Cl  
+HETATM   27  C   DAA    27      16.104 -16.426  50.937  0.00  0.00           C  
+HETATM   28  C   DAA    28      16.364 -15.910  52.174  0.00  0.00           C  
+HETATM   29  C   DAA    29      16.129 -14.436  52.216  0.00  0.00           C  
+HETATM   30  C   DAA    30      17.075 -13.758  51.219  0.00  0.00           C  
+HETATM   31  C   DAA    31      16.782 -14.336  49.824  0.00  0.00           C  
+HETATM   32  C   DAA    32      15.661 -15.367  49.982  0.00  0.00           C  
+HETATM   33  N   DAA    33      19.023 -14.806  50.406  0.00  0.00           N  
+HETATM   34  C   DAA    34      18.091 -14.989  49.390  0.00  0.00           C  
+HETATM   35  O   DAA    35      18.313 -15.572  48.344  0.00  0.00           O1-
+HETATM   36  C   DAA    36      18.523 -14.134  51.515  0.00  0.00           C  
+HETATM   37  O   DAA    37      19.138 -13.898  52.540  0.00  0.00           O1-
+HETATM   38  C   DAA    38      20.387 -15.266  50.304  0.00  0.00           C  
+CONECT    1    4
+CONECT    2    4
+CONECT    3    4    7   14   15
+CONECT    4    1    2    3
+CONECT    5    6    8    9   38
+CONECT    6    5    7   10   11
+CONECT    7    3    6   12   13
+CONECT    8    5
+CONECT    9    5
+CONECT   10    6
+CONECT   11    6
+CONECT   12    7
+CONECT   13    7
+CONECT   14    3
+CONECT   15    3
+CONECT   16   18
+CONECT   17   18
+CONECT   18   16   17   29   32
+CONECT   19   30
+CONECT   20   31
+CONECT   21   38
+CONECT   22   38
+CONECT   23   27
+CONECT   24   28
+CONECT   25   29
+CONECT   26   32
+CONECT   27   23   28   32
+CONECT   28   24   27   29
+CONECT   29   18   25   28   30
+CONECT   30   19   29   31   36
+CONECT   31   20   30   32   34
+CONECT   32   18   26   27   31
+CONECT   33   34   36   38
+CONECT   34   31   33   35
+CONECT   35   34
+CONECT   36   30   33   37
+CONECT   37   36
+CONECT   38    5   21   22   33
+END

@@ -1,0 +1,16 @@
+300K constant temp QMMMMD
+ &cntrl
+  imin=0, ntb=1
+  cut=8.0, ntc=2, ntf=2,
+  tempi=300.0, temp0=300.0,
+  ntt=3, gamma_ln=1.0,
+  nstlim=5000, dt=0.002,
+  ntpr=1, ntwx=1,ifqnt=1
+ /
+ &qmmm
+  qmmask=':1-2',
+  qmcharge=0,
+  qm_theory='PM3',
+  qmshake=1,
+  qm_ewald=1, qm_pme=1
+ /

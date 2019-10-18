@@ -1,0 +1,154 @@
+&GLOBAL
+  PROJECT METAD
+  PRINT_LEVEL LOW
+  RUN_TYPE MD
+&END GLOBAL
+ 
+&FORCE_EVAL
+  METHOD QMMM
+  STRESS_TENSOR ANALYTICAL
+  &DFT
+    CHARGE 0
+    &QS
+      METHOD PM3
+      &SE
+         &COULOMB
+           CUTOFF [angstrom] 10.0
+         &END
+         &EXCHANGE
+           CUTOFF [angstrom] 10.0
+         &END
+      &END
+    &END QS
+    &SCF
+      MAX_SCF 2000
+      EPS_SCF 1.0E-6
+      SCF_GUESS ATOMIC
+      &OT
+        MINIMIZER DIIS
+        PRECONDITIONER FULL_SINGLE_INVERSE
+      &END
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 100
+      &END
+    &END SCF  
+  &END DFT
+  &MM
+    &FORCEFIELD
+      PARMTYPE AMBER
+      PARM_FILE_NAME system.LJ_mod.prmtop
+      &SPLINE
+        EMAX_SPLINE 1.0E8
+        RCUT_NB [angstrom] 10
+      &END SPLINE
+    &END FORCEFIELD
+    &POISSON
+      &EWALD
+        EWALD_TYPE SPME
+        ALPHA .40
+        GMAX 80
+      &END EWALD
+    &END POISSON
+  &END MM
+  &SUBSYS
+    &CELL
+    !Set box dimensions here
+      ABC [angstrom] 106.0725740 110.3645160  92.9056340 
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &TOPOLOGY
+      CONN_FILE_FORMAT AMBER
+      CONN_FILE_NAME system.LJ_mod.prmtop
+      COORD_FILE_FORMAT CRD
+      COORD_FILE_NAME system.md.crd
+    &END TOPOLOGY
+    &KIND Cl-
+     ELEMENT Cl
+    &END KIND
+  &END SUBSYS
+
+    &QMMM
+    ECOUPL COULOMB
+    &CELL
+      ABC 40 40 40
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &QM_KIND N
+      MM_INDEX 6644
+    &END QM_KIND
+    &QM_KIND O
+      MM_INDEX 6648 6646 6628 6627
+    &END QM_KIND
+    &QM_KIND C
+      MM_INDEX 6638 6639 6640 6641 6642 6643 6649 
+    &END QM_KIND
+    &QM_KIND H
+      MM_INDEX 6630 6631 6632 6633
+    &END QM_KIND
+    &QM_KIND CL
+      MM_INDEX 6634 6635 6636 6637 
+    &END QM_KIND
+    &QM_KIND S
+      MM_INDEX 6629
+    &END QM_KIND
+    &LINK
+      MM_INDEX 6616
+      QM_INDEX  6649
+      LINK_TYPE IMOMM
+    &END LINK
+  &END QMMM
+
+&END FORCE_EVAL
+
+ 
+&MOTION
+  &MD
+  ENSEMBLE NPT_I
+  TIMESTEP [fs] 0.5
+  STEPS    20
+  TEMPERATURE 298
+  &BAROSTAT
+    TIMECON [fs] 100
+    PRESSURE [bar] 1.0
+  &END BAROSTAT
+  &THERMOSTAT
+    REGION GLOBAL
+    TYPE CSVR
+    &CSVR
+      TIMECON [fs] 10.
+    &END CSVR
+  &END THERMOSTAT
+  &END MD
+
+&FREE_ENERGY
+  &METADYN
+    USE_PLUMED .TRUE.
+    PLUMED_INPUT_FILE  ./plumed.dat
+  &END METADYN
+&END FREE_ENERGY
+
+  &PRINT
+    &RESTART                                    ! This section controls the printing of restart files
+      &EACH                                     ! A restart file will be printed every 10000 md steps
+        MD 25000
+      &END
+    &END
+    &TRAJECTORY                                 ! Thes section Controls the output of the trajectory
+      FORMAT DCD                                ! Format of the output trajectory is DCD
+      &EACH                                     ! New trajectory frame will be printed each 100 md steps
+        MD 4
+      &END
+    &END
+    &RESTART_HISTORY                            ! This section controls dumping of unique restart files during the run keeping all of them.Most useful if recovery is needed at a later point.
+      &EACH                                     ! A new restart file will be printed every 10000 md steps
+        MD 5000
+      &END
+    &END
+    &CELL
+      &EACH
+        MD 100
+      &END
+    &END
+  &END PRINT
+&END MOTION

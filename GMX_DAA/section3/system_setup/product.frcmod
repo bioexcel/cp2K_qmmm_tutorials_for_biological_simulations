@@ -1,0 +1,22 @@
+Remark line goes here
+MASS
+
+BOND
+
+ANGLE
+cl-c3-s6   57.400     111.990   same as cl-c3-s4, penalty score=  2.2
+c2-c3-s6   61.900     109.890   same as c2-c3-s4, penalty score=  2.2
+c3-c2-cl   63.400     115.320   same as br-c2-c3, penalty score=  1.3
+
+DIHE
+
+IMPROPER
+c3-o -c -o          1.1          180.0         2.0          Using general improper torsional angle  X- o- c- o, penalty score=  3.0)
+c2-c3-c2-cl         1.1          180.0         2.0          Using the default value
+c -c -n -c3         1.1          180.0         2.0          Using the default value
+c3-n -c -o         10.5          180.0         2.0          Using general improper torsional angle  X- X- c- o, penalty score=  6.0)
+
+NONBON
+
+
+

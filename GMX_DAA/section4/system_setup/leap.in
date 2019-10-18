@@ -1,0 +1,18 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+source leaprc.gaff2
+
+loadamberparams product.frcmod
+
+PROT = loadpdb 1c1e.protein.pdb
+LIG = loadmol2 product.mol2
+AGUAS = loadpdb 1c1e.xray_waters.pdb
+
+SYS = combine {PROT LIG AGUAS}
+
+solvatebox SYS TIP3PBOX 15
+addions SYS Cl- 5
+savepdb SYS system.pdb
+saveamberparm SYS system.prmtop system.inpcrd
+
+quit

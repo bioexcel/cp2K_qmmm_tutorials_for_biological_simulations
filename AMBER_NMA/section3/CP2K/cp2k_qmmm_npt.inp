@@ -1,0 +1,133 @@
+&GLOBAL
+  PROJECT MD_QMMM
+  PRINT_LEVEL LOW
+  RUN_TYPE MD
+&END GLOBAL
+
+&FORCE_EVAL
+  METHOD QMMM
+  STRESS_TENSOR ANALYTICAL
+  &DFT
+    CHARGE 0
+    &QS
+      METHOD PM3
+      &SE
+         &COULOMB
+           CUTOFF [angstrom] 10.0
+         &END
+         &EXCHANGE
+           CUTOFF [angstrom] 10.0
+         &END
+      &END
+    &END QS
+    &SCF
+      MAX_SCF 30
+      EPS_SCF 1.0E-6
+      SCF_GUESS ATOMIC
+      &OT
+        MINIMIZER DIIS
+        PRECONDITIONER FULL_SINGLE_INVERSE
+      &END
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 10
+      &END
+    &END SCF  
+  &END DFT
+  &MM
+    &FORCEFIELD
+      PARMTYPE AMBER
+      PARM_FILE_NAME NMA.LJ_mod.prmtop
+      &SPLINE
+        EMAX_SPLINE 1.0E8
+        RCUT_NB [angstrom] 10
+      &END SPLINE
+    &END FORCEFIELD
+    &POISSON
+      &EWALD
+        EWALD_TYPE SPME
+        ALPHA .40
+        GMAX 80
+      &END EWALD
+    &END POISSON
+  &END MM
+  &SUBSYS
+    &CELL
+    !Set box dimensions here
+      ABC [angstrom] 40.1760410  39.3025410  39.5609130
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &TOPOLOGY
+      CONN_FILE_FORMAT AMBER
+      CONN_FILE_NAME NMA.LJ_mod.prmtop
+    &END TOPOLOGY
+  &END SUBSYS
+  &QMMM
+    ECOUPL COULOMB
+    &CELL
+      ABC 40 40 40
+      ALPHA_BETA_GAMMA 90 90 90
+    &END CELL
+    &QM_KIND N
+      MM_INDEX 7 
+    &END QM_KIND
+    &QM_KIND O
+      MM_INDEX 6 
+    &END QM_KIND
+    &QM_KIND C
+      MM_INDEX 2 5 9
+    &END QM_KIND
+    &QM_KIND H
+      MM_INDEX 1 3 4 8 10 11 12
+    &END QM_KIND
+  &END QMMM
+&END FORCE_EVAL
+
+&MOTION
+  &MD
+  ENSEMBLE NPT_I
+  TIMESTEP [fs] 0.5
+  STEPS    20000
+  TEMPERATURE 298
+  &BAROSTAT
+    TIMECON [fs] 100
+    PRESSURE [bar] 1.0
+  &END BAROSTAT
+  &THERMOSTAT
+    REGION GLOBAL
+    TYPE CSVR
+    &CSVR
+      TIMECON [fs] 10.
+    &END CSVR
+  &END THERMOSTAT
+  &END MD
+  &PRINT
+    &RESTART                                    ! This section controls the printing of restart files
+      &EACH                                     ! A restart file will be printed every 10000 md steps
+        MD 25000
+      &END
+    &END
+    &TRAJECTORY                                 ! Thes section Controls the output of the trajectory
+      FORMAT DCD                                ! Format of the output trajectory is DCD
+      &EACH                                     ! New trajectory frame will be printed each 100 md steps
+        MD 4
+      &END
+    &END
+    &RESTART_HISTORY                            ! This section controls dumping of unique restart files during the run keeping all of them.Most useful if recovery is needed at a later point.
+      &EACH                                     ! A new restart file will be printed every 10000 md steps
+        MD 5000
+      &END
+    &END
+    &CELL
+      &EACH
+        MD 100
+      &END
+    &END
+  &END PRINT
+&END MOTION
+
+&EXT_RESTART
+  RESTART_FILE_NAME EM-1.restart
+  RESTART_COUNTERS .FALSE.
+&END
+

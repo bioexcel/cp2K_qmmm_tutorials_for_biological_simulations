@@ -1,0 +1,6 @@
+Initial minimisation of our structure
+ &cntrl
+  imin=1, maxcyc=4500, ncyc=2000,
+  cut=8.0, ntb=1, ntc=2, ntf=2
+ /
+

@@ -1,0 +1,14 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+source leaprc.gaff2
+ 
+loadamberparams product.frcmod
+
+LIG = loadmol2 product.mol2
+
+solvatebox LIG TIP3PBOX 15
+addions LIG Na+ 1
+savepdb LIG system.pdb
+saveamberparm LIG system.prmtop system.inpcrd
+
+quit

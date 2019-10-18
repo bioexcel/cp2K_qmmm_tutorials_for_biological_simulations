@@ -1,0 +1,7 @@
+# Log started on 08/15/2019 [mm/dd/yyyy] at 10:29:04
+# Command line arguments: NMA.prmtop
+# Loaded topologies: NMA.prmtop
+changeLJSingleType :WAT@H1 0.3019 0.047
+changeLJSingleType :WAT@H2 0.3019 0.047
+outparm NMA.LJ_mod.prmtop
+quit
